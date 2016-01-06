@@ -18,6 +18,36 @@
     (= n (last (take-while #(>= n %) tri))))
   )
 
+;; print numbers from 0 -> 10
+(map println (range 11))
+(defn to-ten
+  ([]
+   (to-ten 0))
+  ([num]
+   (println num)
+   (if (< num 10)
+   (recur (inc num)))))
+
+(defn comp-two
+  [f g]
+  (fn [args]
+    (f (apply g args))))
+
+(defn chain-funcs
+  [& funcs]
+    (reduce (fn [f1 f2] (fn [arg] (f1 (f2 arg)))) funcs))
+
+(defn my-comp
+  ;; for a single function
+  ([f]
+   (fn [& args] (apply f args)))
+  ;; for two functions
+  ([f g]
+   (fn [& args] (f (apply g args))))
+  ;; n functions, n > 2
+  ;; only need to call apply on the last one...
+   )
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
